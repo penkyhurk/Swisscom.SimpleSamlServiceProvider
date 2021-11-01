@@ -43,7 +43,7 @@ class Saml extends AbstractEntryPoint
             if ( $response === null ) {
                 exit;
             }
-            $response->setStatus(401)
+            $response->setStatus(401);
             $response->setContent( json_encode( [ 'statusCode' => 401, 'statusMessage' => 'undefined authentication interface' ] ) );
             $response->send();
             exit;
