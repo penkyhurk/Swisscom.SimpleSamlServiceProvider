@@ -7,8 +7,8 @@ namespace Swisscom\SimpleSamlServiceProvider\Security\Authentication\EntryPoint;
 
 use SimpleSAML\Auth\Simple;
 use Swisscom\SimpleSamlServiceProvider\Exception;
-use Neos\Flow\Http\Request;
-use Neos\Flow\Http\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Neos\Flow\Security\Authentication\EntryPoint\AbstractEntryPoint;
 use Neos\Flow\Annotations as Flow;
 
@@ -29,11 +29,11 @@ class Saml extends AbstractEntryPoint
     protected $authenticationInterface;
 
     /**
-     * @param Request $request
-     * @param Response $response
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
      * @throws Exception
      */
-    public function startAuthentication(Request $request, Response $response)
+    public function startAuthentication(ServerRequestInterface $request, ResponseInterface $response)
     {
         /** @var Simple $authentication */
         $authentication = $this->authenticationInterface;
