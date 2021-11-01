@@ -31,14 +31,19 @@ class Saml extends AbstractEntryPoint
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
-     * @throws Exception
+     * @return ResponseInterface
+     * t h r o w s Exception
      */
-    public function startAuthentication(ServerRequestInterface $request, ResponseInterface $response)
+    public function startAuthentication(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         /** @var Simple $authentication */
         $authentication = $this->authenticationInterface;
         if ($authentication === null) {
-            return;
+            // old: return;
+            $response->setStatus(401)
+            $response->setContent( json_encode( [ 'statusCode' => 401, 'statusMessage' => 'undefined authentication interface' ] ) );
+            $response->send();
+            exit;
         }
 
         if ($authentication->isAuthenticated()) {
