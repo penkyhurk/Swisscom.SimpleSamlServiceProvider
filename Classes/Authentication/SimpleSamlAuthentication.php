@@ -42,7 +42,7 @@ class SimpleSamlAuthentication extends \SimpleSAML\Auth\Simple implements Authen
         // TODO: Adapt to \Neos\Flow\Security\Authentication\AuthenticationProviderManager::logout() or even call the method directly if possible
         $session = $this->sessionManager->getCurrentSession();
         $params = is_array($params) ? array_merge($this->logoutParams, $params) : $this->logoutParams;
-        foreach ($this->authenticationManager->getTokens() as $token) {
+        foreach ($this->authenticationManager->getSecurityContext()->getAuthenticationTokens() as $token) {
             if ($token instanceof SamlToken) {
                 /** Logout will redirect and not return to logout process. Therefore the session is destroyed here.
                  * @see \Neos\Flow\Security\Authentication\AuthenticationProviderManager::logout() */
